@@ -1227,18 +1227,22 @@ if ((f) || (msg.chat.id==data.groupId)){
 if (data.clientID.indexOf(msg.message.text)!=-1 || data.workerID.indexOf(msg.message.text)!=-1 ){
 
     if (data.clientID.indexOf(msg.chat.id)!=-1){
-        await msg.tg.sendMessage(data.adminID[0], data.clientData[data.clientID.indexOf(msg.chat.id)], Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}], {columns:1}).resize(true).oneTime(true)));
+        await msg.tg.sendMessage(data.adminID[0], data.clientData[data.clientID.indexOf(msg.chat.id)], Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}, {text: words(data.adminID[0], 59)[0], callback_data:"bExit"}], {columns:1}).resize(true).oneTime(true)));
 
-        await msg.tg.sendMessage(data.groupId, data.clientData[data.clientID.indexOf(msg.chat.id)], Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}], {columns:1}).resize(true).oneTime(true)));
+        await msg.tg.sendMessage(data.groupId, data.clientData[data.clientID.indexOf(msg.chat.id)], Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}, {text: words(data.adminID[0], 59)[0], callback_data:"bExit"}], {columns:1}).resize(true).oneTime(true)));
 
     } else{
 
         (await msg.tg.sendMediaGroup(data.adminID[0], data.workerData[data.workerID.indexOf(msg.message.text)].photo))
-        await msg.tg.sendMessage(data.adminID[0], data.workerData[data.workerID.indexOf(msg.message.text)].text, Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}], {columns:1}).resize(true).oneTime(true)));
+        await msg.tg.sendMessage(data.adminID[0], data.workerData[data.workerID.indexOf(msg.message.text)].text, Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}, {text: words(data.adminID[0], 59)[0], callback_data:"bExit"}], {columns:1}).resize(true).oneTime(true)));
 
 
         (await msg.tg.sendMediaGroup(data.groupId, data.workerData[data.workerID.indexOf(msg.message.text)].photo))
-        await msg.tg.sendMessage(data.groupId, data.workerData[data.workerID.indexOf(msg.message.text)].text, Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}], {columns:1}).resize(true).oneTime(true)));
+        await msg.tg.sendMessage(data.groupId, data.workerData[data.workerID.indexOf(msg.message.text)].text, Extra.HTML(true).markup(Markup.inlineKeyboard([ {text: words(msg.chat.id, 57)[0], callback_data: "benter"}, {text: words(data.adminID[0], 59)[0], callback_data:"bExit"}], {columns:1}).resize(true).oneTime(true))).then(x=>{
+ //           msg.tg.sendMessage(data.groupId,"<b>Olgan ishlari soni: </b>"+data.workData.reduce((val, itm)=>{itm.who == msg.message.text?val = val+1:val = val+0}, 0)+"\n<b>Olingan ishlar kodi: </b>"+data.workData.filter(x => x.who == msg.message.text).map(x => x.codeWork).join(" "), Extra.HTML(true).inReplyTo(x.message_id))
+ msg.tg.sendMessage(data.groupId,"<b>Olgan ishlari soni: </b>"+data.workData.reduce((val, itm) => itm.who == msg.message.text ? val + 1 : val + 0, 0)+"\n<b>Olingan ish kodlari: </b>"+data.workData.filter(x=>x.who==msg.message.text).map(x=>x.codeWork).join(" "), Extra.HTML(true).inReplyTo(x.message_id))   
+
+})
        
        
 
